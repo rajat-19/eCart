@@ -1,26 +1,55 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import {Redirect, BrowserRouter, Route, Link, Switch } from "react-router-dom";
+import Auth from './Auth';
+import Login from './component/Login';
+import Register from './component/Register';
+import Itenary from './component/Itenary';
+import Cart from './component/Cart';
+// using CommonJS modules
+// const BrowserRouter = require("react-router-dom").BrowserRouter;
+// const Route = require("react-router-dom").Route;
+// const Link = require("react-router-dom").Link;
+export default class App extends Component {
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  constructor(props) {
+    super(props);
+  }
+
+
+
+  render() {
+    return (
+        <BrowserRouter>
+        <Switch>
+        <Route path="/itenary" exact>
+          <Itenary />
+        </Route>
+        <Route path="/login">
+            <Login />
+        </Route>
+        <Route path="/register">
+            <Register />
+        </Route>    
+        <Route exact path="/">
+            <Redirect to="/itenary" />
+        </Route>
+        <Route path="/auth">
+            <Auth />
+        </Route>
+        <Route path="/cart">
+            <Cart />
+        </Route>
+        {/* <Route path="/itenary">
+          <Itenary />
+        </Route>
+        <Route path="/">
+          <Home />
+        </Route> */}
+      </Switch>
+      </BrowserRouter>
+
+
+    )
+  }
 }
 
-export default App;
